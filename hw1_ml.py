@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import copy
 import numpy as np
 import pandas as pd
+import statistics
 from scipy import linalg as LA
 from google.colab import drive
 drive.mount("/content/gdrive")
@@ -233,8 +234,6 @@ for max_depth in range(1,7):
     print("Test ME depth " + str(max_depth) + ": " + str(train_entropy_er))
     print("Test Gini depth "  + str(max_depth) + ": " + str(test_gini_er))
     print("Test Entropy depth "  + str(max_depth) + ": " + str(test_entropy_er) + "\n")
-
-import statistics
 
 S_train = []
 S_test = []
