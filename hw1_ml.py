@@ -50,7 +50,7 @@ with open("/content/gdrive/My Drive/car_train.csv", 'r') as f:
 def best_splits(S,Columns,Attributes,Labels,name):
     attribute_dict = dict()
     for attribute_key,attribute_values in Attributes.items():
-        attribute_dict[attribute_key] = Calculate_Gain(S,Columns,attribute,attribute_values,Labels,name)
+        attribute_dict[attribute_key] = Calculate_Gain(S,Columns,attribute_key,attribute_values,Labels,name)
     return max(attribute_dict,key=attribute_dict.get)
 
 def most_common(S,index):
