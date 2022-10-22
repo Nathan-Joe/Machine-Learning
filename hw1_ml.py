@@ -157,6 +157,9 @@ def ID3(S,Columns, Attributes, Labels,name,max_depth,current_depth):
 
   if(len(Attributes) == 0):
     return Node(str(most_common(S,len(Columns)-1)))
+  
+  if max_depth == current_depth:
+    return Node(str(most_common(S,len(Columns)-1)))
 
   A = best_splits(S,Columns,Attributes,Labels,name)
   root_node = Node(str(A))
