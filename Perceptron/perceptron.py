@@ -6,8 +6,6 @@ import copy
 import numpy as np
 import pandas as pd
 from scipy import linalg as LA
-from google.colab import drive
-drive.mount("/content/gdrive")
 
 
 def standard_perceptron(x_train,y_train):
@@ -61,8 +59,8 @@ def averaged_perceptron(x_train,y_train):
       a = a + w
   return a
 
-bank_train = np.loadtxt("/content/gdrive/My Drive/bank-note/train.csv", delimiter=",")
-bank_test = np.loadtxt("/content/gdrive/My Drive/bank-note/test.csv", delimiter=",")
+bank_train = np.loadtxt("bank-note/train.csv", delimiter=",")
+bank_test = np.loadtxt("bank-note/test.csv", delimiter=",")
 
 x_train1 = copy.copy(bank_train)
 y_train1 = bank_train[:,-1]
