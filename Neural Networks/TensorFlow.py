@@ -32,9 +32,9 @@ for i in range(3):
   model.add(Dense(5,activation='relu',kernel_initializer=k_init_relu))
 model.add(Dense(1, activation='sigmoid', kernel_initializer=k_init_relu))
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=10, verbose=0)  
+model.fit(x_train, y_train, epochs=10)  
 
-evaluation = model.evaluate(x_test, y_test, verbose=0)
+evaluation = model.evaluate(x_test, y_test)
 accuracy = evaluation[1]
 error = 1 - accuracy
 print("Depth:", 3, "Width:", 5, "Error:", error)
