@@ -36,6 +36,15 @@ def backwardpass(weights,x,output,y_star):
   
   return dw3,dbias_3,dw2,dbias_2,dw1,dbias_1
 
+weights = np.array([[-2,2],[-3,3]]), np.array([[-2,2],[-3,3]]), np.array([[2],[-1.5]]) 
+biases = np.array([-1, 1]), np.array([-1, 1]), np.array([-1])
+X = np.array([[1,1]]) 
+output,a1,a2 = forwardpass(weights,biases,X)
+print(output,a1,a2)
+y_star = 1 
+dw3,db3,dw2,db2,dw1,db1 = backwardpass(weights,X,output,a1,a2,y_star)
+print(dw3,db3,dw2,db2,dw1,db1)
+
 bank_train = np.loadtxt("/content/gdrive/My Drive/bank-note/train.csv", delimiter=",")
 bank_test = np.loadtxt("/content/gdrive/My Drive/bank-note/test.csv", delimiter=",")
 
@@ -73,7 +82,7 @@ def SGD(weights_rand,biases_rand,x_train):
         gamma = gamma_0/(1+(gamma_0/d)*t)
         t = t + 1
         output,a1,a2 = forwardpass(weights_rand,biases_rand,x_train[i])
-        dw1, db1, dw2, db2, dw3, db3 = backwardpass(weights_rand,x_train[i],output,a1,a2,1)
+        dw3, db3, dw2, db2, dw1, db1 = backwardpass(weights_rand,x_train[i],output,a1,a2,1)
         print(dw1)
         weights_rand[0] = weights_rand[0] - gamma * dw1
         weights_rand[1] = weights_rand[1] - gamma * dw2
