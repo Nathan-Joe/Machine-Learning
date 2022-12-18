@@ -35,3 +35,43 @@ def backwardpass(weights,x,output,y_star):
   dbias_1 = np.sum(d1, axis=0)
   
   return dw3,dbias_3,dw2,dbias_2,dw1,dbias_1
+
+bank_train = np.loadtxt("/content/gdrive/My Drive/bank-note/train.csv", delimiter=",")
+bank_test = np.loadtxt("/content/gdrive/My Drive/bank-note/test.csv", delimiter=",")
+
+x_train = bank_train[:,0:4]
+y_train = bank_train[:,-1]
+x_test = bank_test[:,0:4]
+y_test = bank_test[:,-1]
+
+for i in range(len(y_train)):
+  if y_train[i] == 0:
+    y_train[i] = -1
+for i in range(len(y_test)):
+  if y_test[i] == 0:
+    y_test[i] = -1
+    
+width = 5
+weights_rand = [
+  np.random.randn(x_train.shape[1], width),
+  np.random.randn(width, width),
+  np.random.randn(width, 1)
+]
+biases_rand = [
+    np.random.randn(width),
+    np.random.randn(width),
+    np.random.randn(1)
+]
+
+gamma_0 = 0.01
+d = 0.01
+t = 0
+for T in range(100):
+  shuffle = np.random.permutation(x_train.shape[0])
+  for i in shuffle:
+      gamma = gamma_0/(1+(gamma_0/d)*t)
+      t = t + 1
+      output,a1,a2 = forwardpass(weights_rand,biases_rand,x_train[i])
+      #w = w - gamma * 
+      dw1, db1, dw2, db2, dw3, db3 = backwardpass(weights_rand,x_train[i],output,a1,a2,1)
+      print(dw1)
