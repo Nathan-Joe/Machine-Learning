@@ -63,15 +63,24 @@ biases_rand = [
     np.random.randn(1)
 ]
 
-gamma_0 = 0.01
-d = 0.01
-t = 0
-for T in range(100):
-  shuffle = np.random.permutation(x_train.shape[0])
-  for i in shuffle:
-      gamma = gamma_0/(1+(gamma_0/d)*t)
-      t = t + 1
-      output,a1,a2 = forwardpass(weights_rand,biases_rand,x_train[i])
-      #w = w - gamma * 
-      dw1, db1, dw2, db2, dw3, db3 = backwardpass(weights_rand,x_train[i],output,a1,a2,1)
-      print(dw1)
+def SGD(weights_rand,biases_rand,x_train):
+  gamma_0 = 0.01
+  d = 0.01
+  t = 0
+  for T in range(100):
+    shuffle = np.random.permutation(x_train.shape[0])
+    for i in shuffle:
+        gamma = gamma_0/(1+(gamma_0/d)*t)
+        t = t + 1
+        output,a1,a2 = forwardpass(weights_rand,biases_rand,x_train[i])
+        dw1, db1, dw2, db2, dw3, db3 = backwardpass(weights_rand,x_train[i],output,a1,a2,1)
+        print(dw1)
+        weights_rand[0] = weights_rand[0] - gamma * dw1
+        weights_rand[1] = weights_rand[1] - gamma * dw2
+        weights_rand[2] = weights_rand[2] - gamma * dw3
+        biases_rand[0] = biases_rand[0] - gamma * db1
+        biases_rand[1] = biases_rand[1] - gamma * db2
+        biases_rand[2] = biases_rand[2] - gamma * db3
+  return weights_rand
+
+weight_SGD = SGD(weights_rand,biases_rand,x_train)
